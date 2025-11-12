@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // TODO: Impor drawer yang sudah dibuat sebelumnya
-import 'package:adidos_mobile/left_drawer.dart';
+import 'package:adidos_mobile/widgets/left_drawer.dart';
 
 class ProductFormPage extends StatefulWidget {
     const ProductFormPage({super.key});

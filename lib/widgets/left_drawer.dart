@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:adidos_mobile/menu.dart';
-import 'package:adidos_mobile/adidos_form.dart';
+import 'package:adidos_mobile/screens/menu.dart';
+import 'package:adidos_mobile/screens/adidos_form.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
