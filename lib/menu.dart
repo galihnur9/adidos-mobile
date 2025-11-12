@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:adidos_mobile/adidos_form.dart';
+import 'package:adidos_mobile/left_drawer.dart';
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
   final List<ItemHomepage> items = [
@@ -23,6 +25,7 @@ class MyHomePage extends StatelessWidget {
         // Warna latar belakang AppBar diambil dari skema warna tema aplikasi.
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+      drawer: const LeftDrawer(),
       // Body halaman dengan padding di sekelilingnya.
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -71,9 +74,24 @@ class ItemCard extends StatelessWidget {
           // Menampilkan pesan SnackBar saat kartu ditekan.
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+            ..showSnackBar(SnackBar(
+                content: Text("Kamu telah menekan tombol ${item.name}!")));
+          if (item.name == "Create Product") {
+            // Navigasi ke halaman form tambah produk
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProductFormPage(),
+              ),
             );
+          } else {
+            // Menampilkan pesan SnackBar untuk tombol lainnya
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+              );
+          }
         },
         // Container untuk menyimpan Icon dan Text
         child: Container(
