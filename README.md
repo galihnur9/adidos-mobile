@@ -1,4 +1,6 @@
-# Adidos - Tugas 7
+# Adidos
+
+# Tugas 7: Elemen Dasar Flutter
 
 ## 1. Jelaskan apa itu widget tree pada Flutter dan bagaimana hubungan parent-child (induk-anak) bekerja antar widget.
 
@@ -53,3 +55,81 @@ Dalam Flutter, **hot reload** adalah fitur yang memungkinkan developer memperbar
 **Perbedaannya dengan hot restart:**
 - **Hot reload** hanya memperbarui kode yang berubah dan mempertahankan state aplikasi (misalnya nilai counter tetap sama)
 - **Hot restart** memulai ulang seluruh aplikasi dari awal, sehingga semua state direset seperti saat aplikasi baru dijalankan lagi.
+
+# Tugas 8: Flutter Navigation, Layouts, Forms, and Input Element
+
+## 1. Jelaskan perbedaan antara `Navigator.push()` dan `Navigator.pushReplacement()` pada Flutter. Dalam kasus apa sebaiknya masing-masing digunakan pada aplikasi Football Shop kamu?
+
+**Navigator.push()** menambahkan halaman baru ke stack dan mempertahankan halaman sebelumnya, sehingga user bisa kembali dengan tombol back. **Navigator.pushReplacement()** mengganti halaman saat ini dan menghapusnya dari stack, sehingga user tidak bisa kembali.
+Saya menggunakan `push()` untuk navigasi sementara seperti form tambah produk atau detail produk, dan menggunakan `pushReplacement()` untuk navigasi menu utama dari drawer atau setelah login berhasil.
+
+## 2. Bagaimana kamu memanfaatkan hierarchy widget seperti `Scaffold`, `AppBar`, dan `Drawer` untuk membangun struktur halaman yang konsisten di seluruh aplikasi?
+
+**Scaffold** sebagai struktur dasar semua halaman, yang menyediakan kerangka standar dengan AppBar dan body yang sama di setiap halaman.
+
+**AppBar** dengan konfigurasi konsisten - judul "Adidos", warna biru, dan teks putih bold di semua halaman (`menu.dart` dan `adidos_form.dart`).
+
+**Drawer** (LeftDrawer) yang sama dipasang di setiap Scaffold, memberikan navigasi konsisten dengan header biru dan menu yang seragam.
+
+Struktur hierarki:
+```
+Scaffold
+├── AppBar (konsisten: warna biru, judul putih)
+├── Drawer (LeftDrawer - navigasi standar)
+└── Body (konten berbeda per halaman)
+```
+
+Dengan begini, tampilan dan navigasi aplikasi menjadi seragam dan mudah digunakan di seluruh halaman.
+
+## 3. Dalam konteks desain antarmuka, apa kelebihan menggunakan layout widget seperti `Padding`, `SingleChildScrollView`, dan `ListView` saat menampilkan elemen-elemen form? Berikan contoh penggunaannya dari aplikasi kamu.
+
+**Padding** memberikan jarak konsisten antar elemen form, membuat tampilan lebih rapi dan mudah dibaca.
+```dart
+Padding(
+  padding: const EdgeInsets.all(8.0),
+  child: TextFormField(
+    decoration: InputDecoration(labelText: "Nama Produk"),
+  ),
+),
+```
+
+**SingleChildScrollView** memungkinkan form dengan banyak field dapat di-scroll ketika keyboard muncul atau layar kecil.
+```dart
+body: Form(
+  child: SingleChildScrollView(  // Form bisa di-scroll
+    child: Column(
+      children: [
+        // Field nama, harga, deskripsi, kategori, dll
+      ],
+    ),
+  ),
+),
+```
+
+**ListView** berguna untuk menampilkan daftar item yang dinamis dan dapat di-scroll secara efisien.
+```dart
+ListView(
+  children: [
+    ListTile(title: Text("Home")),
+    ListTile(title: Text("Add Product")),
+  ],
+)
+```
+
+## 4. Bagaimana kamu menyesuaikan warna tema agar aplikasi Football Shop memiliki identitas visual yang konsisten dengan brand toko?
+Saat ini saya masih mengikuti template tutorial dengan warna biru, namun untuk konsistensi brand Adidos, nantinya akan saya ubah ke tema **black and white** yang mirip dengan Adidas.
+
+**Implementasi Saat Ini:**
+```dart
+theme: ThemeData(
+  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+    .copyWith(secondary: Colors.blueAccent[400]),
+),
+```
+
+**Rencana Tema Adidos (Black & White):**
+- **Primary Color**: Hitam untuk AppBar, header drawer, dan background utama
+- **Secondary Color**: Putih untuk tombol dan elemen kontras
+- **Background**: Hitam untuk konsistensi theme gelap
+- **Text Color**: Putih di background hitam, Hitam di background putih
+- **Button Color**: Putih dengan teks hitam untuk highlight
